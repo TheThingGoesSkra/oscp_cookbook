@@ -14,6 +14,6 @@ https://wfuzz.readthedocs.io/en/latest/user/advanced.html
 # Burp
 ## Extention
 ### Logger++
-Permet de faire des recherches dans l'historique du proxy.
-Permet d'exporter sous divers format l'historique du proxy.
+Permet de faire des recherches dans l'historique du proxy.  
+Permet d'exporter sous divers format l'historique du proxy.  
 https://github.com/PortSwigger/logger-plus-plus 
