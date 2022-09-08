@@ -6,6 +6,7 @@
    2. Ajouter l'ip / nom de domaine dans /etc/hosts
    2. Lancer en parralèlle les actions de la rubrique "Scanning"
    3. Regarder tous les liens du site
+   4. Observer les en-têtes HTTP
    4. Noter tous les sous domaines
    5. Ajouter tous les sous domaines à /etc/hosts
    6. Si site https, regarder les infos du certificat, nottament la rubrique Issuer qui peut fournir des infos
