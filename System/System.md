@@ -14,6 +14,7 @@ nmap -sV -p $ports --script="banner,vulners,default" @ip
 ## Récupération manuelle des bannières
 <code> netcat $ad_ip $port </code>
 
+# Lateral movement
 ## Amelioration du shell
 - Si python n'est pas présent 
 <code> script /dev/null -c bash</code>
