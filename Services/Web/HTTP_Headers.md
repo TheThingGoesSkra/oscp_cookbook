@@ -19,6 +19,15 @@ Permet de limiter la liste des serveurs ayant accès aux ressources du site.
 ## COOP - Cross-Origin Opener Policy
 Permet de spécifier qui peut ouvrir en pop up la ressource. 
 
+# Cookie 
+## Secure
+Le cookie ne peut être envoyé qu'à travers une connexion sécurisé https et non http.
+
+## HttpOnly
+Empêche l’utilisation du cookie côté client (ex: js)
+
+## SameSite
+Permet de mitiger les risques liés aux attaques de type CSRF (Cross-Site Request Forgery) et XSSI (Cross-Site Script Inclusion).
 ## Cookie same site:
 https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Set-Cookie/SameSite  
 L'attribut SameSite de l'en-tête de réponse HTTP Set-Cookie vous permet de déclarer si vos cookies doivent être restreints au site visité, à des tiers, ou à des sous-domaines du site actuel.  

@@ -1,0 +1,4 @@
+Exemple d'injection lors d'une authentification:
+```nosql
+{"email":"htb@graph.htb","code":{"$ne": null}}
+```

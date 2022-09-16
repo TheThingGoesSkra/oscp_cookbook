@@ -38,6 +38,10 @@
 [Phoenix.pdf](./Linux/Phoenix.pdf)
 ## Wildcard injection
 [Phoenix.pdf](./Linux/Phoenix.pdf)
+## printerbug et crack NetNTLM hash
+[Hade.pdf](./Linux/Hades.pdf)
+## S4U2Self
+[Hade.pdf](./Linux/Hades.pdf)
 
 # Thematic
 ## Talkative 
@@ -57,3 +61,10 @@
 - Wordpress
 - Injection SQL blind timae based
 - Bypass d'authentification 2 facteurs
+
+## Hades
+- Active directory
+- Docker
+- Windows
+- S4U2Self
+- Volume caché

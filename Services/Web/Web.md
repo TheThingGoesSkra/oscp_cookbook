@@ -129,7 +129,7 @@ https://connect.ed-diamond.com/MISC/misc-062/utilisation-avancee-de-sqlmap
 
 ## Portail d'authentification
 Les tests à réaliser sur les portails  d'authentifications sont les suivants:
-1. Identifiants de base: admin:admin, identifiants par défaut 
+1. Identifiants de base: admin:admin, identifiants par défaut https://github.com/ihebski/DefaultCreds-cheat-sheet 
 2. Injection SQL
 3. Regex pour le champs mot de passe: *
 4. Mot de passe oublié 
