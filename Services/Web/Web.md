@@ -19,7 +19,7 @@
 ### Recherche de Vhost
 *Prérequis: Dictionnaires SecList - https://github.com/danielmiessler/SecLists.git*   
 <code>
-gobuster dir -u http://@ip_cible -w /usr/share/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+gobuster vhost -u http://@ip_cible -w /usr/share/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
 </code>  
 Pour chaque Vhost découvert, les ajouter dans /etc/hosts.
 
@@ -55,6 +55,7 @@ Parcourir le site à la recherche d'élément modifiables par l'utilisateur. Ces
 Pour chaque entrée utilisateur rechercher les éventuelles vulnérabilités:
 ### Injection SQL
 L'outil SQLmap est fortement recommandé pour rechercher des vulnérabilités SQL.
+Voir : [](../../)
 ### Utilisation
 Utilisation de SQLmap en ligne de commandes :
 #### Scann et énumération
@@ -126,6 +127,13 @@ https://connect.ed-diamond.com/MISC/misc-062/utilisation-avancee-de-sqlmap
 - Classic
 - Via XSS (voi OverGraph)  
 ### Server Side Template Injection
+
+### Local File Inclusion
+Permet de charger le contenu de ressource web ou de fichier du système (peu courant). Généralement on va réaliser une redirection au sein d'un paramètre URL pour afficher le code source d'une page. Cependant, cela peut générer des erreurs. Dans ce cas il faut essayer d'extraire le contenu sous forme de chaune de caractère base64.
+Exemple avec php :
+```php
+https://streamio.htb/admin/?debug=php://filter/convert.base64-encode/resource=index.php
+```
 
 ## Portail d'authentification
 Les tests à réaliser sur les portails  d'authentifications sont les suivants:

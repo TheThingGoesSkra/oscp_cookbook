@@ -1,6 +1,8 @@
 # Skill required
 ## fondamental Linux 
 [Talkative.pdf](./Linux/Talkative.pdf)
+## Fondamental Windows
+StreamIO
 ## fondamental docker
 [Talkative.pdf](./Linux/Talkative.pdf.tar.gz)
 ## Analyse de code source
@@ -10,10 +12,11 @@
 ## Binary exploitation 
 [OverGraph.pdf](./Linux/OverGraph.pdf.tar.gz)
 ## Injection SQL
-
+StreamIO
 ## Cracking de hash
-
+StreamIO
 ## Revue de code
+StreamIO
 
 # Skill learned
 ## Enumeration réseau
@@ -68,3 +71,10 @@
 - Windows
 - S4U2Self
 - Volume caché
+
+## StreamIO
+- LDAP abuse for privilege escalation
+- Custom MSQQL injection knowledge
+- Remote file includes
+- LFI using PHP wrappers
+- Bloodhound knowledge

@@ -1,19 +1,6 @@
 # Reconnaissance
 # Scanning & Enumeration
 
-# Lateral movement
-## Amelioration du shell
-- Si python n'est pas présent 
-<code> script /dev/null -c bash</code>
-ou
-```console
-script /dev/null -c bash
-ctrl-z
-stty raw -echo; fg
-Enter twice
-```
-
-
 
 # Exploitation (Gaining Access)
 # Exfiltration de données
@@ -46,6 +33,17 @@ Lien vers le binaire: https://github.com/jpillora/chisel/releases/
 ```
 3. Accéder au port cible de la machine distante
 joindre localhost:<port_localhost>
+
+## Amelioration du shell
+- Si python n'est pas présent 
+<code> script /dev/null -c bash</code>
+ou
+```console
+script /dev/null -c bash
+ctrl-z
+stty raw -echo; fg
+Enter twice
+```
 
 # Privilege Escalation
 ## Recherche de défaut de configuration et de vulnérabilités
